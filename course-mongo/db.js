@@ -1,6 +1,6 @@
 const MongoClient = require('mongodb').MongoClient;
 const ObjectId = require('mongodb').ObjectID;
-const dbname = "course_internal";
+const dbname = "course-internal";
 const url = "mongodb://localhost:27017";
 const mongoOptions = { useNewUrlParser: true,  useUnifiedTopology: true };
 

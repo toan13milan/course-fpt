@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { LoginService } from './login.service';
+import { Routes, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -8,8 +10,9 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(private loginService: LoginService, private router: Router) { }
 
+  isLoginFalse = '';
   form: FormGroup = new FormGroup({
     username: new FormControl(''),
     password: new FormControl(''),
@@ -18,18 +21,34 @@ export class LoginComponent implements OnInit {
   roles = [
     'admin', 'trainer', 'trainee'
   ]
-  foods: any[] = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'}
-  ];
-  submit() {
+  
+  submit(userName: string, password: string, role: string) {
+    console.log(userName, password, role);
+    
     if (this.form.valid) {
-      console.log('logiin');
-      
+      this.loginService.logIn(userName, password, role).subscribe(val => {
+        console.log(val);
+        if (val.code === 200) {
+          localStorage.setItem('userName', userName);
+          localStorage.setItem('role', role);
+          localStorage.setItem('userId', val.userId);
+          if (role === 'admin') {
+            this.router.navigateByUrl('/account-manager');
+          } else {
+            this.router.navigateByUrl('/course');
+          }
+        } else {
+          this.isLoginFalse = val.message;
+        }
+      } , (err) => {
+        this.isLoginFalse = err;
+      })
     }
   }
   ngOnInit() {
+    localStorage.removeItem('userName');
+    localStorage.removeItem('role');
+    localStorage.removeItem('userId');
   }
 
 }

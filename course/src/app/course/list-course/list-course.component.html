@@ -1,0 +1,29 @@
+<div style="max-width: 90%; margin: auto">
+    <h1>
+        Course
+    </h1>
+    <div>
+        <button mat-raised-button style="float: right; margin-bottom: 250px" color="primary" *ngIf="role === 'admin'" [routerLink]="['/course/course-add']">
+            Add course</button>
+    </div>
+    <hr>
+    <div *ngFor="let c of courseData">
+        <h4>{{c.name}}</h4>
+        <div *ngFor="let course of c.data" style="display: inline-block">
+            <mat-card class="example-card" style="max-width: 200px;margin: 25px;">
+                <mat-card-header>
+                    <mat-card-title>{{course.name}}</mat-card-title>
+                </mat-card-header>
+                <img mat-card-image src="https://lagunita.stanford.edu/c4x/StanfordOnline/O.P.E.N./asset/course_design_tile.jpg"
+                    alt="Photo of a Shiba Inu">
+                <mat-card-content>
+                    <p>{{course.description}}</p>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-button [routerLink]="['/course/course-view/' + course._id]" *ngIf="course.detail" >View</button>
+                    <button mat-button style="float: right" *ngIf="role !== 'trainee'" [routerLink]="['/course/course-edit/' + course._id]">Edit</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+</div>

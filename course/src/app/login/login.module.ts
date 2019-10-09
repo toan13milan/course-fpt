@@ -16,6 +16,7 @@ import {
 } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 const modules = [
   MatCardModule,
@@ -33,6 +34,7 @@ const modules = [
     LoginRoutingModule,
     modules,
     ReactiveFormsModule,
+    HttpClientModule
   ]
 })
 export class LoginModule { }

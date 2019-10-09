@@ -1,0 +1,34 @@
+<div style="max-width: 90%; margin: auto">
+    <mat-form-field class="example-full-width" style="margin: auto; width: 100%;">
+        <input matInput placeholder="Name" [(ngModel)]="course.name">
+    </mat-form-field>
+    <mat-form-field class="example-full-width" style="margin: auto; width: 100%;">
+        <textarea matInput placeholder="Description" [(ngModel)]="course.description"> </textarea>
+    </mat-form-field>
+
+
+    <mat-form-field class="example-full-width" style="margin: auto; width: 100%;">
+        <mat-select placeholder="Topic" [(ngModel)]="course.topicId">
+            <mat-option *ngFor="let topic of topics" [value]="topic._id">{{topic.name}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" style="margin: auto; width: 100%;">
+        <mat-select placeholder="Category" [(ngModel)]="course.categoryId">
+            <mat-option *ngFor="let category of categories" [value]="category._id">{{category.name}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" style="margin: auto; width: 100%;">
+        <mat-select placeholder="Trainer" [(ngModel)]="course.trainerId">
+            <mat-option *ngFor="let trainer of trainers" [value]="trainer._id">{{trainer.name}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+        <angular-editor  *ngIf="role === 'trainer'" [placeholder]="'Enter text here...'"  [config]="editorConfig" [(ngModel)]="course.detail"></angular-editor>
+    <!-- <p *ngIf="invalid" style="max-width: 250px;margin: auto;color: red">form invalid</p> -->
+    <button mat-button color="warn" style="float: right; margin-right: 5px;border: 1px solid gray"
+        (click)="cancel()">Cancel</button>
+    <button mat-button color="primary" style="float: right; margin-right: 5px;border: 1px solid gray"
+        (click)="save()">Save</button>
+</div>

@@ -7,6 +7,16 @@ const routes: Routes = [
     loadChildren: './login/login.module#LoginModule',
     canActivate: [],
   },
+  {
+    path: 'account-manager',
+    loadChildren: './account-manager/account-manager.module#AccountManagerModule',
+    canActivate: [],
+  },
+  {
+    path: 'course',
+    loadChildren: './course/course.module#CourseModule',
+    canActivate: [],
+  },
 ];
 
 const config: ExtraOptions = {
